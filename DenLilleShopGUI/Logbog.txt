@@ -1,0 +1,6 @@
+﻿d. 15/10-20:
+Har rodet rundt med at sætte databasen op til de data der skal bruges til vores lille shop, og opsat et Use Case, samt et Klasse diagram, der kan blive ændret
+når der sker nogle ændringer i filerne.
+Har indsat en App.config fil, hvori der gerne skulle få SQL databasens adgang igennem min connectionstring, der er blevet sat op deri.
+
+
