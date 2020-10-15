@@ -94,47 +94,21 @@
                 </TabControl>
             </TabItem>
             <TabItem Header="Slet">
-                <TabControl>
-                    <TabItem Header="Kunde">
-                        <Grid Width="{Binding Path=ActualWidth, ElementName=Wind}" x:Name="GridSletKunde" Height="Auto">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" MinHeight="50"/>
-                                <RowDefinition Height="*" MinHeight="50"/>
-                            </Grid.RowDefinitions>
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="Ordre">
-                        <Grid Width="{Binding Path=ActualWidth, ElementName=Wind}" x:Name="GridSletOrdre" Height="Auto">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" MinHeight="50"/>
-                                <RowDefinition Height="*" MinHeight="50"/>
-                            </Grid.RowDefinitions>
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="Vare">
-                        <Grid Width="{Binding Path=ActualWidth, ElementName=Wind}" x:Name="GridSletVare" Height="Auto">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" MinHeight="50"/>
-                                <RowDefinition Height="*" MinHeight="50"/>
-                            </Grid.RowDefinitions>
-                        </Grid>
-                    </TabItem>
-                </TabControl>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" MinHeight="50"/>
+                        <RowDefinition Height="*" MinHeight="50"/>
+                        <RowDefinition Height="*" MinHeight="50"/>
+                        <RowDefinition Height="*" MinHeight="50"/>
+                    </Grid.RowDefinitions> 
+                    
+                </Grid>
+                
             </TabItem>
             <TabItem Header="Hvis kunde ordre">
                 <Grid Width="{Binding Path=ActualWidth, ElementName=Wind}" x:Name="GridKundeOrdre" Height="Auto">

@@ -1,6 +1,24 @@
 ﻿d. 15/10-20:
-Har rodet rundt med at sætte databasen op til de data der skal bruges til vores lille shop, og opsat et Use Case, samt et Klasse diagram, der kan blive ændret
-når der sker nogle ændringer i filerne.
+Logbog:
+Har rodet rundt med at sætte databasen op til de data der skal bruges til vores lille shop, og opsat et Use Case,
+samt et Klasse diagram med starten på relationerne opsat, der kan blive ændret når der sker nogle ændringer i filerne.
 Har indsat en App.config fil, hvori der gerne skulle få SQL databasens adgang igennem min connectionstring, der er blevet sat op deri.
+Har også sat Mappen op på GitHub, så der er en versionsstyring.
 
+Nuværende problemer/udfordring er at finde ud af præcis hvordan man sørger for at man forbinder til databasens tables.
+
+Sidder også og tænker hvor meget normalisering der kan gøres for at det hele kører nemt, samt skal der sættes nogle view op.
+
+for at gøre alt til WPF nemmere skal der nok laves nogle stored procedures, for at kunne gøre dataindsættelse nemmere og sørge for brdre sikkerhed til databasen.
+
+planer for imorgen:
+sætte hele databasen op med alle tables, og sørge for at de overholder 3. normalform, og dertil sætte data ind i tables, så der kan laves nogle views
+ca. 10 kunder skal laves, 50 ordre skal sættes op, som hver har ca. 5-10 vare i sig, hvor de vare kan have en til flere i kvantitet.
+Efter views er lavet, kan der rodes med at lave stored procedures, for at sikre databasen imod injections, også selvom det nok ikke er nødvendigt i denne omgang,
+for meget sikkerhed ikke dårligt, kun hvis det kommer til at gå ud over brugerne af programmet.
+vil også bruge sql server management studio til at lave et E/R Diagram, med des hjælp til at sætte det hele rigtigt op.
+efter hele databasen er lavet og forbindelsen er ordnet, kan AutoIncrement.cs filen blive udkommenteret og fjerne brugen af den i MainWindow.xaml.cs.
+
+
+d.16/10-20:
 
