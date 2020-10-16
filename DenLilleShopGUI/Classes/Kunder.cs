@@ -25,9 +25,8 @@ namespace DenLilleShopGUI.Classes
         {
 
         }
-        public Kunder(int id, string firstName, string surName, int teleNr, string eMail)
+        public Kunder(string firstName, string surName, int teleNr, string eMail)
         {
-            this.Id = id;
             this.ForNavn = firstName;
             this.EfterNavn = surName;
             this.TlfNummer = teleNr;
@@ -40,7 +39,6 @@ namespace DenLilleShopGUI.Classes
 
         ~Kunder()
         {
-            this.Id = 0;
             this.ForNavn = string.Empty;
             this.EfterNavn = string.Empty;
             this.TlfNummer = 0;

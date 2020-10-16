@@ -27,14 +27,17 @@ namespace DenLilleShopGUI
     public partial class MainWindow : Window
     {
         // Auto Incrementing tal til id for de forskellige, som kunde, ordre og vare.
-        AutoIncrement autoKunde = new AutoIncrement();
+        /*AutoIncrement autoKunde = new AutoIncrement();
         AutoIncrement autoOrdre = new AutoIncrement();
         AutoIncrement autoVare = new AutoIncrement();
+        */
         // lister for kunder, ordre og varer
         List<Kunder> shopKunder = new List<Kunder>();
         List<Ordre> shopOrdre = new List<Ordre>();
         List<Varer> shopVare = new List<Varer>();
-
+        /// <summary>
+        /// starter vinduet op, når programmet begynder
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -69,7 +72,7 @@ namespace DenLilleShopGUI
         /// <param name="e"></param>
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            Kunder kunde = new Kunder(autoKunde.GenerateId(), txtForNavn.Text.ToString(), txtEfterNavn.Text.ToString(), int.Parse(txtTelefonNummer.Text.ToString()), txtEmail.Text.ToString());
+            Kunder kunde = new Kunder(txtForNavn.Text.ToString(), txtEfterNavn.Text.ToString(), int.Parse(txtTelefonNummer.Text.ToString()), txtEmail.Text.ToString());
             shopKunder.Add(kunde);
             txtEmail.Text = string.Empty;
             txtForNavn.Text = string.Empty;
@@ -85,7 +88,7 @@ namespace DenLilleShopGUI
         /// <param name="e"></param>
         private void butnSubmitOrdre_Click(object sender, RoutedEventArgs e)
         {
-            Ordre ordre = new Ordre(autoOrdre.GenerateId(), int.Parse(txtKundeID.Text.ToString()));
+            Ordre ordre = new Ordre(int.Parse(txtKundeID.Text.ToString()));
             shopOrdre.Add(ordre);
             foreach(Kunder kunde in shopKunder)
             {
@@ -105,7 +108,7 @@ namespace DenLilleShopGUI
         /// <param name="e"></param>
         private void butnSubmitUkId_Click(object sender, RoutedEventArgs e)
         {
-            Ordre ordre = new Ordre(autoOrdre.GenerateId());
+            Ordre ordre = new Ordre();
         }
         /// <summary>
         /// Laver en vare fra vinduet, som bliver givet til en liste over mulige vare man kan købe/sætte på ordre.
@@ -115,7 +118,7 @@ namespace DenLilleShopGUI
         /// <param name="e"></param>
         private void btnSubmitVare_Click(object sender, RoutedEventArgs e)
         {
-            Varer vare = new Varer(autoVare.GenerateId(), txtTitel.Text.ToString(), txtBeskriv.Text.ToString(), double.Parse(txtPris.Text.ToString()));
+            Varer vare = new Varer( txtTitel.Text.ToString(), txtBeskriv.Text.ToString(), double.Parse(txtPris.Text.ToString()));
             shopVare.Add(vare);
             txtPris.Text = string.Empty;
             txtBeskriv.Text = string.Empty;

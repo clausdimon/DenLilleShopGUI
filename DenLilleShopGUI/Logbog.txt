@@ -11,14 +11,21 @@ Sidder også og tænker hvor meget normalisering der kan gøres for at det hele 
 
 for at gøre alt til WPF nemmere skal der nok laves nogle stored procedures, for at kunne gøre dataindsættelse nemmere og sørge for brdre sikkerhed til databasen.
 
-planer for imorgen:
-sætte hele databasen op med alle tables, og sørge for at de overholder 3. normalform, og dertil sætte data ind i tables, så der kan laves nogle views
-ca. 10 kunder skal laves, 50 ordre skal sættes op, som hver har ca. 5-10 vare i sig, hvor de vare kan have en til flere i kvantitet.
-Efter views er lavet, kan der rodes med at lave stored procedures, for at sikre databasen imod injections, også selvom det nok ikke er nødvendigt i denne omgang,
-for meget sikkerhed ikke dårligt, kun hvis det kommer til at gå ud over brugerne af programmet.
-vil også bruge sql server management studio til at lave et E/R Diagram, med des hjælp til at sætte det hele rigtigt op.
-efter hele databasen er lavet og forbindelsen er ordnet, kan AutoIncrement.cs filen blive udkommenteret og fjerne brugen af den i MainWindow.xaml.cs.
-
 
 d.16/10-20:
+har sat alle tables op, og kigget på, om de overholder 3. normalform, og har oprettet de 2 views for at se kundedata og ordrerdata.
+taget tankerne igang på at oprette stored procedures, lavet et E/R Diagram, men med databasen og des tables lavet,
+kan der nu fjernes AutoIncrement.cs filen fra Visual Studio, da databasen gerne skulle kunne lave ID for de forskellige hvor den automatisk sigger sidste ID++.
+med Tables og derfor skal programmet ikke sende et id afsted med resten af dataen.
 
+Problemer for dagen:
+havde lidt problemer med at sætte views op igennem designeren fra MSQL Management Studio.
+
+planer for imorgen:
+ca. 10 kunder skal laves, 50 ordre skal sættes op, som hver har ca. 5-10 vare i sig, hvor de vare kan have en til flere i kvantitet.
+lave stored procedures, for at sikre databasen imod injections, også selvom det nok ikke er nødvendigt i denne omgang,
+for meget sikkerhed ikke dårligt, kun hvis det kommer til at gå ud over brugerne af programmet.
+sætte programmet op, så det er klart til at man kan bruge Class Libary sammen med de lavede classes/objekter.
+sætte programmet op, til at man henter stored procedures, som man bruger sammen med databasen.
+sætte det op så en ordreoprettelse/opdatering har en klik og vælg Varer, som kommer fra databasen, og ved valgt, vil id for tingen blive sendt til den rigtige database.
+(evt. bruge scrollbar eller bruge klikable datagrid(hvordan findes ud af))

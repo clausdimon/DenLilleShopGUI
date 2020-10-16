@@ -17,13 +17,8 @@ namespace DenLilleShopGUI.Classes
         {
 
         }
-        public Ordre(int id)
+        public Ordre(int kId)
         {
-            this.Id = id;
-        }
-        public Ordre(int id, int kId)
-        {
-            this.Id = id;
             this.KundeId = kId;
         }
         public void AddVarer(Varer vare)
@@ -32,7 +27,6 @@ namespace DenLilleShopGUI.Classes
         }
         ~Ordre()
         {
-            this.Id = 0;
             this.KundeId = 0;
             //Console.WriteLine("Deconstructor was Called");
         }

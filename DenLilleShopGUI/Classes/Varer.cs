@@ -19,9 +19,8 @@ namespace DenLilleShopGUI.Classes
         { 
 
         }
-        public Varer(int id, string titelS, string beskrivelseS, double prisD)
+        public Varer( string titelS, string beskrivelseS, double prisD)
         {
-            this.Id = id;
             this.Titel = titelS;
             this.Beskrivelse = beskrivelseS;
             this.Pris = prisD;
@@ -29,7 +28,6 @@ namespace DenLilleShopGUI.Classes
 
         ~Varer()
         {
-            this.Id = 0;
             this.Titel = string.Empty;
             this.Beskrivelse = string.Empty;
             this.Pris = 0;
