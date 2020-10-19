@@ -45,6 +45,8 @@
                             <Label Content="E-mail adresse" Grid.Row="1" Grid.Column="1" Target="{Binding ElementName=txtEmail}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <TextBox x:Name="txtEmail" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="95"/>
                             <Button x:Name="Submit" Content="Submit" Grid.Row="3" Grid.Column="1" Click="Submit_Click" />
+                            <Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LblErrorOpretKunde" Visibility="Hidden"/>
+                            
                         </Grid>
                     </TabItem>
                     <TabItem Header="Ordre">
@@ -67,6 +69,7 @@
                             <Button x:Name="butnSubmitOrdre" Content="Submit" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="butnSubmitOrdre_Click" Grid.Column="1" Grid.Row="3"/>
                             <Label Content="Submit uden kunde ID" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Target="{Binding ElementName=}"/>
                             <Button x:Name="butnSubmitUkId" Content="Submit" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="butnSubmitUkId_Click" />
+                            <Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LblErrorOpretOrdre" Visibility="Hidden"/>
                         </Grid> 
                     </TabItem>
                     <TabItem Header="Vare">
@@ -89,6 +92,7 @@
                             <Label Content="Pris" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Target="{Binding ElementName=txtPris}"/>
                             <TextBox x:Name="txtPris" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="95" PreviewTextInput="TextBox_PreviewTextInput"/>
                             <Button Content="Submit" x:Name="btnSubmitVare" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="btnSubmitVare_Click"/>
+                            <Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LblErrorOpretVare" Visibility="Hidden"/>
                         </Grid>
                     </TabItem>
                 </TabControl>

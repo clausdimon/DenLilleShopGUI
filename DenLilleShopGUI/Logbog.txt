@@ -21,11 +21,19 @@ med Tables og derfor skal programmet ikke sende et id afsted med resten af datae
 Problemer for dagen:
 havde lidt problemer med at sætte views op igennem designeren fra MSQL Management Studio.
 
-planer for imorgen:
-ca. 10 kunder skal laves, 50 ordre skal sættes op, som hver har ca. 5-10 vare i sig, hvor de vare kan have en til flere i kvantitet.
+d.19/10-20:
+har fået lavet CL(class libary), og fået sat .dll filen fra CL til projektet, og har arbejdet med at få alle stored procedures til at virke, 
+samt har sat nogle test grundlæggende data ind i de forskellige tables.
+
+Problemer for dagen:
+havde lige lidt tvivl omkring hvordan man skulle sætte nogle af stored procedures op, men fik fundet frem til hvordan det skulle gøres.
+
+
+Planer for imorgen:
 lave stored procedures, for at sikre databasen imod injections, også selvom det nok ikke er nødvendigt i denne omgang,
 for meget sikkerhed ikke dårligt, kun hvis det kommer til at gå ud over brugerne af programmet.
-sætte programmet op, så det er klart til at man kan bruge Class Libary sammen med de lavede classes/objekter.
 sætte programmet op, til at man henter stored procedures, som man bruger sammen med databasen.
 sætte det op så en ordreoprettelse/opdatering har en klik og vælg Varer, som kommer fra databasen, og ved valgt, vil id for tingen blive sendt til den rigtige database.
-(evt. bruge scrollbar eller bruge klikable datagrid(hvordan findes ud af))
+(evt. bruge scrollbar eller bruge klikable datagrid(hvordan findes ud af)).
+Arbejde videre med Stored Procedures.
+

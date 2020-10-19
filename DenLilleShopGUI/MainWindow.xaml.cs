@@ -1,5 +1,4 @@
-﻿using DenLilleShopGUI.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +16,7 @@ using System.Text.RegularExpressions;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-
+using CL_Den_Lille_Shop;
 
 namespace DenLilleShopGUI
 {
@@ -72,12 +71,22 @@ namespace DenLilleShopGUI
         /// <param name="e"></param>
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            Kunder kunde = new Kunder(txtForNavn.Text.ToString(), txtEfterNavn.Text.ToString(), int.Parse(txtTelefonNummer.Text.ToString()), txtEmail.Text.ToString());
-            shopKunder.Add(kunde);
-            txtEmail.Text = string.Empty;
-            txtForNavn.Text = string.Empty;
-            txtTelefonNummer.Text = string.Empty;
-            txtEmail.Text = string.Empty;
+            try
+            {
+                Kunder kunde = new Kunder(txtForNavn.Text.ToString(), txtEfterNavn.Text.ToString(), int.Parse(txtTelefonNummer.Text.ToString()), txtEmail.Text.ToString(), "Get Adress", 5000);
+                shopKunder.Add(kunde);
+                txtEmail.Text = string.Empty;
+                txtForNavn.Text = string.Empty;
+                txtTelefonNummer.Text = string.Empty;
+                txtEmail.Text = string.Empty;
+
+
+            }
+            catch (Exception ex)
+            {
+
+                LblErrorOpretKunde.Content = ex.Message;
+            }
         }
         /// <summary>
         /// laver en ordre fra vinduet, hvor den sætter kunde id og id på ordren, 
@@ -88,16 +97,18 @@ namespace DenLilleShopGUI
         /// <param name="e"></param>
         private void butnSubmitOrdre_Click(object sender, RoutedEventArgs e)
         {
-            Ordre ordre = new Ordre(int.Parse(txtKundeID.Text.ToString()));
-            shopOrdre.Add(ordre);
-            foreach(Kunder kunde in shopKunder)
+            try
             {
-                if(kunde.Id == int.Parse(txtKundeID.ToString()))
-                {
-                    kunde.KundeOrdre.Add(ordre);
-                }
+                Ordre ordre = new Ordre(int.Parse(txtKundeID.Text.ToString()));
+                shopOrdre.Add(ordre);
+
             }
-            txtKundeID.Text = string.Empty;
+            catch (Exception ex)
+            {
+
+                LblErrorOpretOrdre.Content = ex.Message;
+            }
+            
 
         }
         /// <summary>
