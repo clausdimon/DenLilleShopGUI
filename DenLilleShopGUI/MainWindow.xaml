@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DenLilleShopGUI" 
-        xmlns:local1="clr-namespace:DenLilleShopGUI.Classes"
+        xmlns:local1="clr-namespace:CL_Den_Lille_Shop;assembly=CL_Den_Lille_Shop" 
         mc:Ignorable="d"
         Title="Den Lille Shop"
         Height="Auto" 
@@ -33,6 +33,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" MinHeight="50"/>
                                 <RowDefinition Height="*" MinHeight="50"/>
+                                <RowDefinition Height="*" MinHeight="50"/>
                                 <RowDefinition Height="*" MinHeight="10"/>
                                 <RowDefinition Height="*" MinHeight="50"/>
                             </Grid.RowDefinitions>
@@ -44,8 +45,12 @@
                             <TextBox x:Name="txtTelefonNummer" Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="95" PreviewTextInput="NumberValidationTextBox"/>
                             <Label Content="E-mail adresse" Grid.Row="1" Grid.Column="1" Target="{Binding ElementName=txtEmail}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <TextBox x:Name="txtEmail" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="95"/>
-                            <Button x:Name="Submit" Content="Submit" Grid.Row="3" Grid.Column="1" Click="Submit_Click" />
-                            <Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LblErrorOpretKunde" Visibility="Hidden"/>
+                            <Label Content="Adresse" Grid.Row="2" Grid.Column="0" Target="{Binding ElementName=txtAdress}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <TextBox x:Name="txtAdress" Grid.Row="2" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="95"/>
+                            <Label Content="Postnummer" Grid.Row="2" Grid.Column="1" Target="{Binding ElementName=txxtPostCode}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <TextBox x:Name="txtPostCode" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="95" PreviewTextInput="NumberValidationTextBox"/>
+                            <Button x:Name="Submit" Content="Submit" Grid.Row="4" Grid.Column="1" Click="Submit_Click" />
+                            <Label Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LblErrorOpretKunde" Visibility="Hidden"/>
                             
                         </Grid>
                     </TabItem>
@@ -67,7 +72,7 @@
                             <TextBox x:Name="txtKundeID" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="25" PreviewTextInput="NumberValidationTextBox"/>
                             <Label Content="Submit med kunde ID" Grid.Row="3" Grid.Column="1" Target="{Binding ElementName=butnSubmitOrdre}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                             <Button x:Name="butnSubmitOrdre" Content="Submit" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="butnSubmitOrdre_Click" Grid.Column="1" Grid.Row="3"/>
-                            <Label Content="Submit uden kunde ID" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Target="{Binding ElementName=}"/>
+                            <Label Content="Submit uden kunde ID" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Target="{Binding ElementName=butnSubmitUkId}"/>
                             <Button x:Name="butnSubmitUkId" Content="Submit" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="butnSubmitUkId_Click" />
                             <Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LblErrorOpretOrdre" Visibility="Hidden"/>
                         </Grid> 
@@ -114,7 +119,7 @@
                 </Grid>
                 
             </TabItem>
-            <TabItem Header="Hvis kunde ordre">
+            <TabItem Header="Hvis kunde ordre" HorizontalAlignment="Right" Margin="0,-2,-2,0" Width="107">
                 <Grid Width="{Binding Path=ActualWidth, ElementName=Wind}" x:Name="GridKundeOrdre" Height="Auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>

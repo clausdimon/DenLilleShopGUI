@@ -25,6 +25,7 @@ namespace DenLilleShopGUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         // Auto Incrementing tal til id for de forskellige, som kunde, ordre og vare.
         /*AutoIncrement autoKunde = new AutoIncrement();
         AutoIncrement autoOrdre = new AutoIncrement();
@@ -34,6 +35,11 @@ namespace DenLilleShopGUI
         List<Kunder> shopKunder = new List<Kunder>();
         List<Ordre> shopOrdre = new List<Ordre>();
         List<Varer> shopVare = new List<Varer>();
+        SqlConnection conn = null;
+        SqlDataReader dataReader = null;
+        SqlCommand sqlCommand = null;
+        SqlInteraction interaction = new SqlInteraction();
+        SqlInteraction sqlInteraction = new SqlInteraction("conString2");
         /// <summary>
         /// starter vinduet op, når programmet begynder
         /// </summary>
@@ -41,7 +47,7 @@ namespace DenLilleShopGUI
         {
             InitializeComponent();
             //var con = ConfigurationManager.ConnectionStrings["conString"].ConnectionString;
-            
+
         }
         /// <summary>
         /// bruges til at tjekke en textbox om der kun er tal fra [0-9] i teksten.
@@ -71,14 +77,20 @@ namespace DenLilleShopGUI
         /// <param name="e"></param>
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
+            LblErrorOpretKunde.Content = string.Empty;
+            interaction.AddNewKunde(txtForNavn.Text, txtEfterNavn.Text, int.Parse(txtTelefonNummer.Text), txtEmail.Text, txtAdress.Text, int.Parse(txtPostCode.Text), LblErrorOpretKunde);
+            txtEmail.Text = string.Empty;
+            txtForNavn.Text = string.Empty;
+            txtTelefonNummer.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtAdress.Text = string.Empty;
+            txtPostCode.Text = string.Empty;
+
+            /*
             try
             {
                 Kunder kunde = new Kunder(txtForNavn.Text.ToString(), txtEfterNavn.Text.ToString(), int.Parse(txtTelefonNummer.Text.ToString()), txtEmail.Text.ToString(), "Get Adress", 5000);
                 shopKunder.Add(kunde);
-                txtEmail.Text = string.Empty;
-                txtForNavn.Text = string.Empty;
-                txtTelefonNummer.Text = string.Empty;
-                txtEmail.Text = string.Empty;
 
 
             }
@@ -87,6 +99,7 @@ namespace DenLilleShopGUI
 
                 LblErrorOpretKunde.Content = ex.Message;
             }
+            */
         }
         /// <summary>
         /// laver en ordre fra vinduet, hvor den sætter kunde id og id på ordren, 

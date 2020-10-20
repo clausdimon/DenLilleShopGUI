@@ -28,12 +28,18 @@ samt har sat nogle test grundlæggende data ind i de forskellige tables.
 Problemer for dagen:
 havde lige lidt tvivl omkring hvordan man skulle sætte nogle af stored procedures op, men fik fundet frem til hvordan det skulle gøres.
 
+d.20/10-20:
+har rodet med at sætte alle sql ting ind i en class, der i sidste ende skal kunne sættes i cl(.dll filen), og har givet dem nogle overloads,
+for hver af de måder man kalder på funktionerne, for at sikre bedre brug af systemet hos andre.
+på stående fod lige nu, kan den ikke sættes ind i cl, da det indtil videre kun bliver brugt Mine, men kan nemt ændres,
+så funktionen har selve stored procedure navnet bliver brugt.
+
+Problemer med dagen:
+skal lige finde ud af hvordan man sætter dataTable data ind i datagrid
+har fundet nogle ideer dertil, men skal lige rode videre med det for at finde det helt rigtige
 
 Planer for imorgen:
-lave stored procedures, for at sikre databasen imod injections, også selvom det nok ikke er nødvendigt i denne omgang,
-for meget sikkerhed ikke dårligt, kun hvis det kommer til at gå ud over brugerne af programmet.
 sætte programmet op, til at man henter stored procedures, som man bruger sammen med databasen.
 sætte det op så en ordreoprettelse/opdatering har en klik og vælg Varer, som kommer fra databasen, og ved valgt, vil id for tingen blive sendt til den rigtige database.
 (evt. bruge scrollbar eller bruge klikable datagrid(hvordan findes ud af)).
-Arbejde videre med Stored Procedures.
 
