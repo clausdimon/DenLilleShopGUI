@@ -78,13 +78,14 @@ namespace DenLilleShopGUI
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             LblErrorOpretKunde.Content = string.Empty;
-            interaction.AddNewKunde(txtForNavn.Text, txtEfterNavn.Text, int.Parse(txtTelefonNummer.Text), txtEmail.Text, txtAdress.Text, int.Parse(txtPostCode.Text), LblErrorOpretKunde);
+            interaction.AddNewKunde(txtForNavn.Text, txtEfterNavn.Text, int.Parse(txtTelefonNummer.Text), txtEmail.Text, txtAdress.Text, int.Parse(txtPostCode.Text), LblErrorOpretKunde,LblSuccesOpretKunde);
             txtEmail.Text = string.Empty;
             txtForNavn.Text = string.Empty;
             txtTelefonNummer.Text = string.Empty;
             txtEmail.Text = string.Empty;
             txtAdress.Text = string.Empty;
             txtPostCode.Text = string.Empty;
+
 
             /*
             try

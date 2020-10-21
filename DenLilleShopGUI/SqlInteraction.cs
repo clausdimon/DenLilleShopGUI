@@ -1,12 +1,13 @@
 ﻿using CL_Den_Lille_Shop;
+using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
+using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace DenLilleShopGUI
 {
@@ -15,19 +16,47 @@ namespace DenLilleShopGUI
         private SqlConnection conn;
         private SqlCommand sqlCommand;
         private SqlDataReader reader;
-        public void CreateConnection(string connString)
+        private Visibility seeMe = Visibility.Visible;
+        private Visibility hideMe = Visibility.Hidden;
+        /// <summary>
+        /// used to create connection to the sql server, using app.config file to store the connection, so it will be easy to use when the method need to run
+        /// </summary>
+        /// <param name="connString">name of the connection added in app.config file</param>
+        private void CreateConnection(string connString)
         {
             SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings[connString].ConnectionString);
             conn = sqlConnection;
         }
+        /// <summary>
+        /// using a defualt connection, based on a generic name "conString" in the app.config
+        /// 
+        /// calls the method CreateConnection to add the connection string to the object
+        /// </summary>
         public SqlInteraction()
         {
             CreateConnection("conString");
         }
+        /// <summary>
+        /// calling the method CreateConnection to create the connectionstring, used to make the connection to the sql server.
+        /// 
+        ///
+        /// </summary>
+        /// <param name="conn">the name in app.config for the connectionstring that have been added</param>
         public SqlInteraction(string conn)
         {
             CreateConnection(conn);
         }
+        /// <summary>
+        /// a method to use a stored procedure called AddKunde, where it uses the stored procedure to add the param with the values connected to the right param.
+        /// </summary>
+        /// <param name="fN">the first name of the new Kunde that needed to be added</param>
+        /// <param name="lN">the last name of the new Kunde that needed to be added</param>
+        /// <param name="phN">the phonenumber of the new Kunde that needed to be added</param>
+        /// <param name="eM">the email of the new Kunde that needed to be added</param>
+        /// <param name="adr">the adress of the new Kunde that needed to be added</param>
+        /// <param name="pC">the postcode of the new Kunde that needed to be added</param>
+        /// <param name="error">a Label for the catch, to send the exceptions that have been caught</param>
+        /// <param name="succes">a Label for the message to be given, that everything is succesfull</param>
         public void AddNewKunde(string fN, string lN, int phN, string eM, string adr, int pC, Label error, Label succes)
         {
             try
@@ -47,7 +76,9 @@ namespace DenLilleShopGUI
                         sqlCommand.ExecuteNonQuery();
                         conn.Close();
 
+                        error.Visibility = Visibility.Hidden;
                         succes.Content = "Added new Kunde";
+                        succes.Visibility = Visibility.Visible;
                     }
 
                 }
@@ -55,13 +86,29 @@ namespace DenLilleShopGUI
             }
             catch (SqlException sqlEx)
             {
+                succes.Visibility = Visibility.Hidden;
                 error.Content = sqlEx.Message;
+                error.Visibility = Visibility.Visible;
             }
             catch (Exception ex)
             {
+                succes.Visibility = Visibility.Hidden;
                 error.Content += ex.Message;
+                error.Visibility = Visibility.Visible;
             }
         }
+        /// <summary>
+        /// a method to use a stored procedure called AddKunde, where it uses the stored procedure to add the param with the values connected to the right param.
+        /// in this the parans are the  pure textbox, so no need to give the different type of param to make the method to run correctly.
+        /// </summary>
+        /// <param name="firstName">a textbox with the first name of the new Kunde, for the sql stored procedure.</param>
+        /// <param name="lastName">a textbox with the last name of the new Kunde, for the sql stored procedure.</param>
+        /// <param name="phoneNumber">a textbox with the phonenumber of the new Kunde, for the sql stored procedure.</param>
+        /// <param name="email">a textbox with the email of the new Kunde, for the sql stored procedure.</param>
+        /// <param name="adresse">a textbox with the adress of the new Kunde, for the sql stored procedure.</param>
+        /// <param name="postCode">a textbox with the postcode of the new Kunde, for the sql stored procedure.</param>
+        /// <param name="error">a Label for the catch, to send the exceptions that have been caught</param>
+        /// <param name="succes">a Label for the message to be given, that everything is succesfull</param>
         public void AddNewKunde(TextBox firstName, TextBox lastName, TextBox phoneNumber, TextBox email, TextBox adresse, TextBox postCode, Label error, Label succes)
         {
             try
@@ -81,7 +128,9 @@ namespace DenLilleShopGUI
                         sqlCommand.ExecuteNonQuery();
                         conn.Close();
 
+                        error.Visibility = Visibility.Hidden;
                         succes.Content = "Added new Kunde";
+                        succes.Visibility =Visibility.Visible;
                     }
 
                 }
@@ -89,13 +138,23 @@ namespace DenLilleShopGUI
             }
             catch (SqlException sqlEx)
             {
+                succes.Visibility = Visibility.Hidden;
                 error.Content = sqlEx.Message;
+                error.Visibility = Visibility.Visible;
             }
             catch (Exception ex)
             {
+                succes.Visibility = Visibility.Hidden;
                 error.Content += ex.Message;
+                error.Visibility = Visibility.Visible;
             }
         }
+        /// <summary>
+        /// a method to use a stored procedure called AddOrdre.
+        /// </summary>
+        /// <param name="kundeID">the int value that is coming from the Kunnde Table in the database, telling what customer that get the new Ordre</param>
+        /// <param name="error">a Label for the catch, to send the exceptions that have been caught</param>
+        /// <param name="succes">a Label for the message to be given, that everything is succesfull</param>
         public void AddNewOrdre(int kundeID, Label error, Label succes)
         {
             try
@@ -865,7 +924,161 @@ namespace DenLilleShopGUI
                 conn.Close();
 
             }
-            dataGrid.DataSource = dt;
+            dataGrid.ItemsSource = dt.DefaultView;
+        }
+        public void AddProcedures( List<string> parameters, List<string> values, List<string> type, string storedProcedureName, Label error, Label succes)
+        {
+            try
+            {
+                using (conn)
+                {
+                    conn.Open();
+                    using (sqlCommand = new SqlCommand(storedProcedureName, conn))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        for (int i = 0; i < parameters.Count; i++)
+                        {
+                            switch (type[i])
+                            {
+                                case "int":
+                                    sqlCommand.Parameters.AddWithValue(parameters[i].ToString(), SqlDbType.Int).Value = int.Parse(values[i]);
+                                    break;
+                                case "nvarchar":
+                                    sqlCommand.Parameters.AddWithValue(parameters[i].ToString(), SqlDbType.NVarChar).Value = values[i];
+                                    break;
+                                case "text":
+                                    sqlCommand.Parameters.AddWithValue(parameters[i].ToString(), SqlDbType.NText).Value = values[i];
+                                    break;
+                                case "real":
+                                    sqlCommand.Parameters.AddWithValue(parameters[i].ToString(), SqlDbType.Real).Value = double.Parse(values[i]);
+                                    break;
+                                case "datetime2":
+                                    var format = "yyyy-MM-dd HH:mm:ss:fff";
+                                    sqlCommand.Parameters.AddWithValue(parameters[i].ToString(), SqlDbType.DateTime2).Value = DateTime.ParseExact(values[i], format, CultureInfo.InvariantCulture);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        sqlCommand.ExecuteNonQuery();
+                        error.Visibility = Visibility.Hidden;
+                        succes.Content = "Succesfull adding to your table";
+                        succes.Visibility = Visibility.Visible;
+
+                    }
+
+                }
+
+            }
+            catch (SqlException sqlEx)
+            {
+                succes.Visibility = Visibility.Hidden;
+                error.Content = sqlEx.Message;
+                error.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                succes.Visibility = Visibility.Hidden;
+                error.Content += ex.Message;
+                error.Visibility = Visibility.Visible;
+                throw;
+            }
+        }
+        public void UpdateProcedures(List<TextBox> newDatas, List<string> dataTypes, List<string> parameters, string procedureName, int id, string idParam, Label error, Label succes)
+        {
+            try
+            {
+                using (conn)
+                {
+                    conn.Open();
+                    using (sqlCommand = new SqlCommand(procedureName, conn))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        for (int i = 0; i < parameters.Count; i++)
+                        {
+                            switch (dataTypes[i])
+                            {
+                                case "int":
+                                    sqlCommand.Parameters.AddWithValue(parameters[i].ToString(), SqlDbType.Int).Value = int.Parse(newDatas[i].Text.ToString());
+                                    break;
+                                case "nvarchar":
+                                    sqlCommand.Parameters.AddWithValue(parameters[i].ToString(), SqlDbType.NVarChar).Value = newDatas[i].Text.ToString();
+                                    break;
+                                case "text":
+                                    sqlCommand.Parameters.AddWithValue(parameters[i].ToString(), SqlDbType.NText).Value = newDatas[i].Text.ToString();
+                                    break;
+                                case "real":
+                                    sqlCommand.Parameters.AddWithValue(parameters[i].ToString(), SqlDbType.Real).Value = double.Parse(newDatas[i].Text.ToString());
+                                    break;
+                                case "datetime2":
+                                    var format = "yyyy-MM-dd HH:mm:ss:fff";
+                                    sqlCommand.Parameters.AddWithValue(parameters[i].ToString(), SqlDbType.DateTime2).Value = DateTime.ParseExact(newDatas[i].Text.ToString(), format, CultureInfo.InvariantCulture);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        sqlCommand.Parameters.AddWithValue(idParam, SqlDbType.Int).Value = id;
+                        sqlCommand.ExecuteNonQuery();
+                        error.Visibility = Visibility.Hidden;
+                        succes.Content = "Succesfull updating your table";
+                        succes.Visibility = Visibility.Visible;
+
+                    }
+                    conn.Close();
+
+                }
+
+            }
+            catch (SqlException sqlEx)
+            {
+                succes.Visibility = Visibility.Hidden;
+                error.Content = sqlEx.Message;
+                error.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                succes.Visibility = Visibility.Hidden;
+                error.Content += ex.Message;
+                error.Visibility = Visibility.Visible;
+                throw;
+            }
+        }
+        public void DeleteProcedures(List<Parameters> parameters, string procedureName, Label error, Label succes)
+        {
+            try
+            {
+                using (conn)
+                {
+                    conn.Open();
+                    using (sqlCommand = new SqlCommand(procedureName, conn))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        foreach (Parameters item in parameters)
+                        {
+                            sqlCommand.Parameters.AddWithValue(item.Parameter, item.Type).Value = item.Value;
+                        }
+                        sqlCommand.ExecuteNonQuery();
+                        error.Visibility = hideMe;
+                        succes.Content = "Succesful Deleted data from your table";
+                        succes.Visibility = seeMe;
+                    }
+                }
+            }
+            catch( SqlException sqlEx)
+            {
+                succes.Visibility = hideMe;
+                error.Content = sqlEx.Message;
+                error.Visibility = seeMe;
+            }
+            catch (Exception ex)
+            {
+                succes.Visibility = hideMe;
+                error.Content += " "+ ex.Message;
+                error.Visibility = seeMe;
+                throw;
+            }
         }
     }
 }

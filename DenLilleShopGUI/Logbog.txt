@@ -38,8 +38,25 @@ Problemer med dagen:
 skal lige finde ud af hvordan man sætter dataTable data ind i datagrid
 har fundet nogle ideer dertil, men skal lige rode videre med det for at finde det helt rigtige
 
+d.21/10-20:
+har lavet objektet/class til at hente alle stored procedures, og har lavet et object til ved siden af, som skal bruges hvis den med stored procedures skal laves til et cl,
+så der er lavet et objekt der hedder Parameters, som i sig har en string, der er til hvad "@text" der skal ind i sqlcommand, for at give values til at kunne køre en stored procedure.
+
+
+problemer med dagens arbejde: 
+kigget for meget på GUI delen, og har over kompliciceret mange af de ting der skal laves.
+
+
 Planer for imorgen:
-sætte programmet op, til at man henter stored procedures, som man bruger sammen med databasen.
-sætte det op så en ordreoprettelse/opdatering har en klik og vælg Varer, som kommer fra databasen, og ved valgt, vil id for tingen blive sendt til den rigtige database.
-(evt. bruge scrollbar eller bruge klikable datagrid(hvordan findes ud af)).
+"sætte det op så en ordreoprettelse/opdatering har en klik og vælg Varer, som kommer fra databasen, og ved valgt, vil id for tingen blive sendt til den rigtige database.
+(evt. bruge scrollbar eller bruge klikable datagrid(hvordan findes ud af)).(måske ikke nødvendigt nu og her)"
+starte med at teste de fleste ting igennem.
+starte med at skrive et dokument(word), og sætte alle de ting der skal i ind.
+kigge på hvad man kan sætte ind i CL for at få mere ud af det hele(og gøre det).
+opsætte indsætning af data af ordre til en kunde, som bliver hentet fra databasen.(select ordreID,vareriOrdre,kvantitetafvare, pris), som bliver lagt i en liste for kunden, som, vil gøre det nemmere
+at have kundens info i vinduet, end at hver gang hente data fra databasen.
+rode videre med sqlInteraction.cs, med at sætte op til at man kan kalde på en metode i class/objekt, og give alle nødvendige data for at sql funktionerne virker.(lave statements som Select, Delete, Update)
+
+
+"" = skal nok ikke implementeres på stående fod(lige nu og her), da det er mere med gui end OOP og DBP(databaseprogramering)
 
