@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Data.SqlClient;
 
 namespace DenLilleShopGUI
 {
@@ -20,6 +21,7 @@ namespace DenLilleShopGUI
             this.Type = Type;
             this.Value = Value;
         }
+        
 
     }
 }

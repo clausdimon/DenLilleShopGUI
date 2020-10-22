@@ -1080,5 +1080,48 @@ namespace DenLilleShopGUI
                 throw;
             }
         }
+        public void SelectProceduresKunde(List<Parameters> parameters, string procedureName, Label error, Label succes, List<TextBox> textBoxes)
+        {
+            try
+            {
+                using (conn)
+                {
+                    conn.Open();
+                    using (sqlCommand = new SqlCommand(procedureName, conn))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        foreach (Parameters item in parameters)
+                        {
+                            sqlCommand.Parameters.AddWithValue(item.Parameter, item.Type).Value = item.Value;
+                        }
+                        using (reader = sqlCommand.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                foreach (TextBox item in textBoxes)
+                                {
+
+                                }
+                        }
+                        error.Visibility = hideMe;
+                        succes.Content = "Succesful got data from your table";
+                        succes.Visibility = seeMe;
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                succes.Visibility = hideMe;
+                error.Content = sqlEx.Message;
+                error.Visibility = seeMe;
+            }
+            catch (Exception ex)
+            {
+                succes.Visibility = hideMe;
+                error.Content += " " + ex.Message;
+                error.Visibility = seeMe;
+                throw;
+            }
+        }
     }
 }

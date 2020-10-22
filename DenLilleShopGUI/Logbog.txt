@@ -51,7 +51,6 @@ Planer for imorgen:
 "sætte det op så en ordreoprettelse/opdatering har en klik og vælg Varer, som kommer fra databasen, og ved valgt, vil id for tingen blive sendt til den rigtige database.
 (evt. bruge scrollbar eller bruge klikable datagrid(hvordan findes ud af)).(måske ikke nødvendigt nu og her)"
 starte med at teste de fleste ting igennem.
-starte med at skrive et dokument(word), og sætte alle de ting der skal i ind.
 kigge på hvad man kan sætte ind i CL for at få mere ud af det hele(og gøre det).
 opsætte indsætning af data af ordre til en kunde, som bliver hentet fra databasen.(select ordreID,vareriOrdre,kvantitetafvare, pris), som bliver lagt i en liste for kunden, som, vil gøre det nemmere
 at have kundens info i vinduet, end at hver gang hente data fra databasen.
@@ -60,3 +59,13 @@ rode videre med sqlInteraction.cs, med at sætte op til at man kan kalde på en 
 
 "" = skal nok ikke implementeres på stående fod(lige nu og her), da det er mere med gui end OOP og DBP(databaseprogramering)
 
+d. 22/10-20:
+Startet med at få lavet word dokument, til dokumentationen, har sat de færdige ting ind.
+kigget nærmere på min sqlinteraction objekt, og indtil videre er jeg lidt på bar bund, men hvordan jeg kan få den til at blive bedre implementere.
+(måske implementere object med switch case)= kan kalde det og return alle typer objekter, bare at man har en switch case der smider bestemte tilbage.
+på denne måde ville det teoratisk virke, og ville kunne smide alle typer objekter/class tilbage.
+i summary evt lave en liste over hvad der kan bruges i denne sammenhæng(forste blik virker det).
+
+
+problemer for dagens arbejde:
+stoppet op i hvordan det hele kunne sættes op i filen, hvor den skal hente data, studser med et par ideer, hvordan man kan gøre det.
