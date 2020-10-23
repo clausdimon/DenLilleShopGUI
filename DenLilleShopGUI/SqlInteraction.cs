@@ -6,8 +6,11 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections;
+using System.Windows.Input;
 
 namespace DenLilleShopGUI
 {
@@ -1102,6 +1105,7 @@ namespace DenLilleShopGUI
                                 {
 
                                 }
+                            }
                         }
                         error.Visibility = hideMe;
                         succes.Content = "Succesful got data from your table";
@@ -1123,5 +1127,233 @@ namespace DenLilleShopGUI
                 throw;
             }
         }
+        /// <summary>
+        /// Method is used to call a stored procedure, where you select data 
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="procedureName"></param>
+        /// <param name="error"></param>
+        /// <param name="succes"></param>
+        /// <param name="typeOf"></param>
+        /// <returns></returns>
+        public object SelectProcedures(List<Parameters> parameters, string procedureName, Label error, Label succes, int typeOf)
+        {
+            string noType = "type of object not found";
+            try
+            {
+                using (conn)
+                {
+                    conn.Open();
+                    using (sqlCommand = new SqlCommand(procedureName, conn))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        switch (typeOf)
+                        {
+                            case 1://Kunder
+                                Kunder k = new Kunder();
+                                foreach (Parameters item in parameters)
+                                {
+                                    sqlCommand.Parameters.AddWithValue(item.Parameter, item.Type).Value = item.Value;
+                                    if (item.Parameter.Contains("ID"))
+                                    {
+                                        k.Id = int.Parse(item.Value.ToString());
+                                    }
+                                }
+                                using (reader = sqlCommand.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        k.firstName = reader["FirstName"].ToString();
+                                        k.lastName = reader["LastName"].ToString();
+                                        k.tlfNummer = int.Parse(reader["PhoneNumber"].ToString());
+                                        k.email = reader["Email"].ToString();
+                                        k.adresse = reader["Adress"].ToString();
+                                        k.postcode = int.Parse(reader["PostCode"].ToString());
+                                    }
+                                }
+                                
+                                conn.Close();
+                                return k;
+                            case 2://Varer
+                                Varer v = new Varer();
+                                foreach (Parameters item in parameters)
+                                {
+                                    sqlCommand.Parameters.AddWithValue(item.Parameter, item.Type).Value = item.Value;
+                                    if (item.Parameter.Contains("ID"))
+                                    {
+                                        v.Id = int.Parse(item.Value.ToString());
+                                    }
+                                }
+                                using (reader = sqlCommand.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+
+                                        v.Titel = reader["Titel"].ToString();
+                                        v.Beskrivelse = reader["Beskrivelse"].ToString();
+                                        v.Pris = double.Parse(reader["Pris"].ToString());
+                                    }
+                                }
+                                conn.Close();
+                                return v;
+                            case 3: //Ordre
+                                Ordre o = new Ordre();
+                                foreach (Parameters item in parameters)
+                                {
+                                    sqlCommand.Parameters.AddWithValue(item.Parameter, item.Type).Value = item.Value;
+                                    if (item.Parameter.Contains("ID"))
+                                    {
+                                        o.Id = int.Parse(item.Value.ToString());
+                                    }
+                                }
+                                using (reader = sqlCommand.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        o.KundeId = int.Parse(reader["KundeID"].ToString());
+                                    }
+                                }
+                                conn.Close();
+                                return o;
+                            default:
+                                conn.Close();
+                                return noType;
+                        }
+
+
+                    }
+                }
+
+            }
+            catch(SqlException sqlEx)
+            {
+                succes.Visibility = hideMe;
+                error.Content = sqlEx.Message;
+                error.Visibility = seeMe;
+            }
+            catch (Exception ex)
+            {
+                succes.Visibility = hideMe;
+                error.Content += ex.Message;
+                error.Visibility = seeMe;
+            }
+            return noType;
+        }
+        public List<Tuple<List<Kunder>, List<Varer>, List<Ordre>, string>> SelectProcedureMany(List<Parameters> parameters, string procedureName, Label error, Label succes, int typeOf)
+        {
+            List<Tuple<List<Kunder>, List<Varer>, List<Ordre>, string>> all = new List<Tuple<List<Kunder>, List<Varer>, List<Ordre>, string>>();
+            string wrong = "";
+            List<Kunder> k = new List<Kunder>();
+            List<Varer> v = new List<Varer>();
+            List<Ordre> o = new List<Ordre>();
+            
+            try
+            {
+                using (conn)
+                {
+                    conn.Open();
+                    using (sqlCommand = new SqlCommand(procedureName, conn))
+                    {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        switch (typeOf)
+                        {
+                            case 1://Kunder
+                                Kunder kunde = new Kunder();
+                                foreach (Parameters item in parameters)
+                                {
+                                    sqlCommand.Parameters.AddWithValue(item.Parameter, item.Type).Value = item.Value;
+                                    if (item.Parameter.Contains("ID"))
+                                    {
+                                        kunde.Id = int.Parse(item.Value.ToString());
+                                    }
+                                }
+                                using (reader = sqlCommand.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        kunde.firstName = reader["FirstName"].ToString();
+                                        kunde.lastName = reader["LastName"].ToString();
+                                        kunde.tlfNummer = int.Parse(reader["PhoneNumber"].ToString());
+                                        kunde.email = reader["Email"].ToString();
+                                        kunde.adresse = reader["Adress"].ToString();
+                                        kunde.postcode = int.Parse(reader["PostCode"].ToString());
+
+                                        k.Add(kunde);
+                                    }
+                                }
+
+                                conn.Close();
+                                break;
+                            case 2://Varer
+                                Varer vare = new Varer();
+                                foreach (Parameters item in parameters)
+                                {
+                                    sqlCommand.Parameters.AddWithValue(item.Parameter, item.Type).Value = item.Value;
+                                    if (item.Parameter.Contains("ID"))
+                                    {
+                                        vare.Id = int.Parse(item.Value.ToString());
+                                    }
+                                }
+                                using (reader = sqlCommand.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+
+                                        vare.Titel = reader["Titel"].ToString();
+                                        vare.Beskrivelse = reader["Beskrivelse"].ToString();
+                                        vare.Pris = double.Parse(reader["Pris"].ToString());
+
+                                        v.Add(vare);
+                                    }
+
+                                }
+                                conn.Close();
+                                break;
+                            case 3: //Ordre
+                                Ordre ordre = new Ordre();
+                                foreach (Parameters item in parameters)
+                                {
+                                    sqlCommand.Parameters.AddWithValue(item.Parameter, item.Type).Value = item.Value;
+                                    if (item.Parameter.Contains("ID"))
+                                    {
+                                        ordre.Id = int.Parse(item.Value.ToString());
+                                    }
+                                }
+                                using (reader = sqlCommand.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        ordre.KundeId = int.Parse(reader["KundeID"].ToString());
+                                        o.Add(ordre);
+                                    }
+                                }
+                                conn.Close();
+                                break;
+                            default:
+                                conn.Close();
+                                wrong = "type of object not found";
+                                break;
+                        }
+                        Tuple<List<Kunder>, List<Varer>, List<Ordre>, string> add = new Tuple<List<Kunder>, List<Varer>, List<Ordre>, string>(k, v, o, wrong);
+                        all.Add(add);
+                    }
+                }
+
+            }
+            catch (SqlException sqlEx)
+            {
+                succes.Visibility = hideMe;
+                error.Content = sqlEx.Message;
+                error.Visibility = seeMe;
+            }
+            catch (Exception ex)
+            {
+                succes.Visibility = hideMe;
+                error.Content += ex.Message;
+                error.Visibility = seeMe;
+            }
+            return all;
+        }
+    }
     }
 }

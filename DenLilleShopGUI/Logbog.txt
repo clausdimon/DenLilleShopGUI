@@ -69,3 +69,10 @@ i summary evt lave en liste over hvad der kan bruges i denne sammenhæng(forste 
 
 problemer for dagens arbejde:
 stoppet op i hvordan det hele kunne sættes op i filen, hvor den skal hente data, studser med et par ideer, hvordan man kan gøre det.
+
+d.23/10-20:
+rodet med at få sqlInteraction til at virke, hvor den returner et object, men da dette ikke var muligt, hvis man skal få det hele til at virke, skal man bruge Tuple, som ikke kan betale sig.
+kommet frem til at filen skal deles, for at mindske linjerne(mængden af data der skal loades ved opstart.
+
+problemer for dagens arbejde:
+få en liste af objekter i method returning, og for at få det hele på plads skal det hele laves med en for grim kombination af koder.
