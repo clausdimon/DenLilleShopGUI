@@ -129,7 +129,22 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" MinHeight="50"/>
                         <RowDefinition Height="*" MinHeight="50"/>
+                        <RowDefinition Height="*" MinHeight="50"/>
                     </Grid.RowDefinitions>
+                    <ComboBox Grid.Row="0" Grid.Column="0" x:Name="checkKunder" Width="Auto" SelectionChanged="checkKunder_SelectionChanged" HorizontalAlignment="Center">
+                        
+                    </ComboBox>
+                    <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="Kunde" ItemsSource="{Binding}" AutoGenerateColumns="False" Width="Auto"  Height="Auto" HorizontalAlignment="Center">
+                       <!-- <DataGridTextColumn Header="KundeID" Binding="{Binding Path=KundeID}"/>
+                        <DataGridTextColumn Header="FirstName" Binding="{Binding Path=FirstName}"/>
+                        <DataGridTextColumn Header="LastName" Binding="{Binding Path=LastName}"/>
+                        <DataGridTextColumn Header="PhoneNumber" Binding="{Binding Path=PhoneNumber}"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}"/>
+                        <DataGridTextColumn Header="Adress" Binding="{Binding Path=Adress}"/>
+                        <DataGridTextColumn Header="PostCode" Binding="{Binding Path=PostCode}"/>-->
+                    </DataGrid>
+                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LblErrorGetKundeID" Visibility="Hidden"/>
+                    <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LblSuccesGetKundeID" Visibility="Hidden"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Hvis shops totale salg">

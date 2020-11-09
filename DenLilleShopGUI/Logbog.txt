@@ -76,3 +76,11 @@ kommet frem til at filen skal deles, for at mindske linjerne(mængden af data de
 
 problemer for dagens arbejde:
 få en liste af objekter i method returning, og for at få det hele på plads skal det hele laves med en for grim kombination af koder.
+
+
+d.9/11-20:
+skiftet over til at bruge console applikation istedet for wpf, da det mindsker mange af de nuværende problemer, dertil har jeg lagt alt SQL database tilgangen til mit CL, og buildet, 
+lige fikset de få fejl der var deri, som er blevet fundet. fået sat op i console app, at lave en oversigt over en enkelt bruger ud fra id, og skulle gerne kunne få sat op, så den også kommer med søgemuligheder til navn eller telefon nummer, eller adressen.
+
+problemer for dagens arbejde:
+har ikke kunne få det hele til at kører ordentligt, mange problemer med combi af database og wpf, løst dette ved at ændre det til at blive kørt fra console applikation, hvor der nu skal integreres mit CL, til at få det hele på plads til onsdag til evaluering.

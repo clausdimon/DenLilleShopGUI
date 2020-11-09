@@ -38,8 +38,8 @@ namespace DenLilleShopGUI
         SqlConnection conn = null;
         SqlDataReader dataReader = null;
         SqlCommand sqlCommand = null;
-        SqlInteraction interaction = new SqlInteraction();
-        SqlInteraction sqlInteraction = new SqlInteraction("conString2");
+        SqlAdd get = new SqlAdd();
+        SqlInteraction sqlInteraction = new SqlInteraction();
         /// <summary>
         /// starter vinduet op, når programmet begynder
         /// </summary>
@@ -47,6 +47,7 @@ namespace DenLilleShopGUI
         {
             InitializeComponent();
             //var con = ConfigurationManager.ConnectionStrings["conString"].ConnectionString;
+            ComboboxFiller();
 
         }
         /// <summary>
@@ -78,7 +79,7 @@ namespace DenLilleShopGUI
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             LblErrorOpretKunde.Content = string.Empty;
-            interaction.AddNewKunde(txtForNavn.Text, txtEfterNavn.Text, int.Parse(txtTelefonNummer.Text), txtEmail.Text, txtAdress.Text, int.Parse(txtPostCode.Text), LblErrorOpretKunde,LblSuccesOpretKunde);
+            get.AddNewKunde(txtForNavn, txtEfterNavn,txtTelefonNummer, txtEmail, txtAdress, txtPostCode, LblErrorOpretKunde,LblSuccesOpretKunde);
             txtEmail.Text = string.Empty;
             txtForNavn.Text = string.Empty;
             txtTelefonNummer.Text = string.Empty;
@@ -148,6 +149,27 @@ namespace DenLilleShopGUI
             txtPris.Text = string.Empty;
             txtBeskriv.Text = string.Empty;
             txtTitel.Text = string.Empty;
+        }
+        private void ComboboxFiller()
+        {
+            SqlGet get = new SqlGet();
+            List<Kunder> kunder = get.getKunder(LblErrorGetKundeID, LblSuccesGetKundeID);
+
+            foreach (Kunder i in kunder)
+            {
+                checkKunder.Items.Add(i.setFullName());
+            }
+            checkKunder.SelectedIndex = 0;
+
+
+        }
+
+        private void checkKunder_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Kunde.ItemsSource = null;
+            int id = checkKunder.SelectedIndex;
+
+            sqlInteraction.UseViewWithSearch(id+1, Kunde, LblErrorGetKundeID, "vAlleDataForOrdre", "KundeID");
         }
     }
 }
